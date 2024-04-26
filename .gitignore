@@ -1,3 +1,4 @@
 fasttrack/.env
 main_app/__pycache__/
+main_app/migrations/__pycache__/
 fasttrack/__pycache__/
