@@ -3,22 +3,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CurrentBalanceForm, MonthlyCostsForm
-from .models import Current_Balance, Monthly_Costs
+from .forms import CurrentBalanceForm, MonthlyCostsForm, MonthlyPaymentsForm
+from .models import Current_Balance, Monthly_Costs, Monthly_Payments
 
 @login_required
 def home(request):
     cur_balance = Current_Balance.objects.filter(user=request.user).first()
     monthly_costs = Monthly_Costs.objects.filter(user=request.user)
+    monthly_payments = Monthly_Payments.objects.filter(user=request.user)
     add_balance_form = CurrentBalanceForm
     add_monthly_costs_form = MonthlyCostsForm
+    add_monthly_payment_form = MonthlyPaymentsForm
     return render(request, 'home.html', {
         'cur_balance':cur_balance, 
         'monthly_costs':monthly_costs,
         'add_balance_form':add_balance_form,
-        'add_monthly_costs_form':add_monthly_costs_form
+        'add_monthly_costs_form':add_monthly_costs_form,
+        'monthly_payments':monthly_payments,
+        'add_monthly_payments_form':add_monthly_payment_form
     })
 
 @login_required
@@ -57,6 +61,15 @@ def add_monthly_costs(request, user_id):
         new_monthly_cost = form.save(commit=False)
         new_monthly_cost.user_id = user_id
         new_monthly_cost.save()
+    return redirect('home')
+
+@login_required
+def add_monthly_payments(request, user_id):
+    form = MonthlyPaymentsForm(request.POST)
+    if form.is_valid():
+        new_monthly_payment = form.save(commit=False)
+        new_monthly_payment.user_id = user_id
+        new_monthly_payment.save()
     return redirect('home')
 
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
