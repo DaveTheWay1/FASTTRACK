@@ -7,7 +7,7 @@
         <div class="card-content">
             <h1 class="center-align">${{ cur_balance.amount }}</h1>
             <div class="card-action">
-                <a class="right" href="">Edit</a>
+                <a class="right" href="{% url 'current_balance_update' cur_balance.id %}">Edit</a>
             </div>
         </div>
     </div>
