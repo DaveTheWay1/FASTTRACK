@@ -22,28 +22,57 @@
 </div>
 {% endif %}
 {% if monthly_costs %}
-<h5 class="center-align green-text">Monthly Costs</h5>
-{% for cost in monthly_costs %}
-<div class="col s6">
-    <div class="card">
-        <div class="card-content">
-            <h5 class="center-align">{{ cost.name }}</h1>
-            <div class="card-action">
-                <p class="center-align">${{ cost.amount }}</p>
-                <a class="right"href="">Delete</a>
-                <a class="right" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
+<div class="row">
+    <h5 class="center-align green-text">Monthly Costs</h5>
+    {% for cost in monthly_costs %}
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <h5 class="center-align">{{ cost.name }}</h1>
+                <div class="card-action">
+                    <p class="center-align">${{ cost.amount }}</p>
+                    <a class="right"href="">Delete</a>
+                    <a class="right" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
+                </div>
             </div>
         </div>
     </div>
+    {% endfor %}
+    {% endif %}
 </div>
+
+<h5 class="center-align">Add A Monthly Cost</h5>
+<form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
+    {% csrf_token %}
+    {{ add_monthly_costs_form.as_p }}
+    <input type="submit" class="btn right" value="Add Monthly Cost">
+</form>
+
+{% if monthly_payments %}
+<div class="row">
+    <h5 class="center-align green-text">Monthly Payments</h5>
+    {% for payment in monthly_payments %}
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <h5 class="center-align">{{ payment.name }}</h1>
+                <div class="card-action">
+                    <p class="center-align">${{ payment.amount }}</p>
+                    <a class="right"href="">Delete</a>
+                    <a class="right" href="">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endfor %}
 {% endif %}
-<div class="col s6">
-    <h5 class="center-align">Add A Monthly Cost</h5>
-    <form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
+</div>
+<h5 class="center-align">Add A Monthly Payment</h5>
+<div>
+    <form action="{% url 'add_monthly_payments' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
-        {{ add_monthly_costs_form.as_p }}
-        <input type="submit" class="btn right" value="Add Monthly Cost">
+        {{ add_monthly_payments_form.as_p }}
+        <input type="submit" class="btn right" value="Add Monthly Payment">
     </form>
 </div>
 {% endblock %}
