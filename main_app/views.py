@@ -62,3 +62,7 @@ def add_monthly_costs(request, user_id):
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
     model = Current_Balance
     fields = ['amount']
+
+class MonthlyCostUpdate(LoginRequiredMixin, UpdateView):
+    model = Monthly_Costs
+    fields = ['name','amount']

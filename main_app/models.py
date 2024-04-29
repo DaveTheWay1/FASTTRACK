@@ -13,3 +13,6 @@ class Monthly_Costs(models.Model):
     name = models.CharField(max_length=50)
     amount = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('home')
