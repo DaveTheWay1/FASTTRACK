@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CurrentBalanceForm
 from .models import Current_Balance
@@ -40,3 +42,7 @@ def add_current_balance(request, user_id):
         new_current_balance.user_id = user_id
         new_current_balance.save()
     return redirect('home')
+
+class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
+    model = Current_Balance
+    fields = ['amount']
