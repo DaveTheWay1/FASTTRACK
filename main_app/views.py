@@ -5,14 +5,21 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CurrentBalanceForm
-from .models import Current_Balance
+from .forms import CurrentBalanceForm, MonthlyCostsForm
+from .models import Current_Balance, Monthly_Costs
 
 @login_required
 def home(request):
     cur_balance = Current_Balance.objects.filter(user=request.user).first()
+    monthly_costs = Monthly_Costs.objects.filter(user=request.user)
     add_balance_form = CurrentBalanceForm
-    return render(request, 'home.html', {'cur_balance':cur_balance, 'add_balance_form':add_balance_form})
+    add_monthly_costs_form = MonthlyCostsForm
+    return render(request, 'home.html', {
+        'cur_balance':cur_balance, 
+        'monthly_costs':monthly_costs,
+        'add_balance_form':add_balance_form,
+        'add_monthly_costs_form':add_monthly_costs_form
+    })
 
 @login_required
 def user_logout(request):
@@ -41,6 +48,15 @@ def add_current_balance(request, user_id):
         new_current_balance = form.save(commit=False)
         new_current_balance.user_id = user_id
         new_current_balance.save()
+    return redirect('home')
+
+@login_required
+def add_monthly_costs(request, user_id):
+    form = MonthlyCostsForm(request.POST)
+    if form.is_valid():
+        new_monthly_cost = form.save(commit=False)
+        new_monthly_cost.user_id = user_id
+        new_monthly_cost.save()
     return redirect('home')
 
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
