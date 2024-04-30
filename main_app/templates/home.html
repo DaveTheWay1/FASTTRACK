@@ -85,7 +85,7 @@
                     <h5 class="center-align">{{ purchase.name }}</h1>
                     <div class="card-action">
                         <p class="center-align">${{ purchase.amount }}</p>
-                        <a class="right"href="">Delete</a>
+                        <a class="right"href="{% url 'additional_purchase_delete' purchase.id %}">Delete</a>
                         <a class="right" href="{% url 'additional_purchase_update' purchase.id %}">Edit</a>
                     </div>
                 </div>
