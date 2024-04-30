@@ -96,3 +96,7 @@ class MonthlyCostUpdate(LoginRequiredMixin, UpdateView):
 class MonthlyPaymentUpdate(LoginRequiredMixin, UpdateView):
     model = Monthly_Payments
     fields = ['name','amount']
+
+class AdditionalPurchaseUpdate(LoginRequiredMixin, UpdateView):
+    model = Additional_Purchases
+    fields = ['name','amount']
