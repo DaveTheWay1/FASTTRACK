@@ -67,6 +67,18 @@ def add_monthly_costs(request, user_id):
         new_monthly_cost.save()
     return redirect('home')
 
+
+def apply_monthly_costs(request, current_balance, monthly_cost):
+    cb = Current_Balance.objects.get(id=current_balance)
+    mc = Monthly_Costs.objects.get(id=monthly_cost)
+    x = cb.amount
+    y = mc.amount
+    applied = x - y
+    print(applied)
+    cb.amount = applied
+    cb.save()
+    return redirect('home')
+
 @login_required
 def add_monthly_payments(request, user_id):
     form = MonthlyPaymentsForm(request.POST)
@@ -76,6 +88,17 @@ def add_monthly_payments(request, user_id):
         new_monthly_payment.save()
     return redirect('home')
 
+def apply_monthly_payment(request, current_balance, monthly_payment):
+    cb = Current_Balance.objects.get(id=current_balance)
+    mp = Monthly_Payments.objects.get(id=monthly_payment)
+    x = cb.amount
+    y = mp.amount
+    applied = x + y
+    print(applied)
+    cb.amount = applied
+    cb.save()
+    return redirect('home')
+
 @login_required
 def add_additional_purchases(request, user_id):
     form = AdditionalPurchasesForm(request.POST)
@@ -83,6 +106,17 @@ def add_additional_purchases(request, user_id):
         new_additional_purchase = form.save(commit=False)
         new_additional_purchase.user_id = user_id
         new_additional_purchase.save()
+    return redirect('home')
+
+def apply_additional_purchase(request, current_balance, additional_purchase):
+    cb = Current_Balance.objects.get(id=current_balance)
+    ap = Additional_Purchases.objects.get(id=additional_purchase)
+    x = cb.amount
+    y = ap.amount
+    applied = x - y
+    print(applied)
+    cb.amount = applied
+    cb.save()
     return redirect('home')
 
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
