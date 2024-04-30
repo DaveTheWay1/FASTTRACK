@@ -5,24 +5,28 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CurrentBalanceForm, MonthlyCostsForm, MonthlyPaymentsForm
-from .models import Current_Balance, Monthly_Costs, Monthly_Payments
+from .forms import CurrentBalanceForm, MonthlyCostsForm, MonthlyPaymentsForm, AdditionalPurchasesForm
+from .models import Current_Balance, Monthly_Costs, Monthly_Payments, Additional_Purchases
 
 @login_required
 def home(request):
     cur_balance = Current_Balance.objects.filter(user=request.user).first()
     monthly_costs = Monthly_Costs.objects.filter(user=request.user)
     monthly_payments = Monthly_Payments.objects.filter(user=request.user)
+    additional_purchases = Additional_Purchases.objects.filter(user=request.user)
     add_balance_form = CurrentBalanceForm
     add_monthly_costs_form = MonthlyCostsForm
-    add_monthly_payment_form = MonthlyPaymentsForm
+    add_monthly_payments_form = MonthlyPaymentsForm
+    add_additional_purchases_form = AdditionalPurchasesForm
     return render(request, 'home.html', {
         'cur_balance':cur_balance, 
         'monthly_costs':monthly_costs,
         'add_balance_form':add_balance_form,
         'add_monthly_costs_form':add_monthly_costs_form,
         'monthly_payments':monthly_payments,
-        'add_monthly_payments_form':add_monthly_payment_form
+        'add_monthly_payments_form':add_monthly_payments_form,
+        'additional_purchases':additional_purchases,
+        'add_additional_purchases_form':add_additional_purchases_form
     })
 
 @login_required
@@ -70,6 +74,15 @@ def add_monthly_payments(request, user_id):
         new_monthly_payment = form.save(commit=False)
         new_monthly_payment.user_id = user_id
         new_monthly_payment.save()
+    return redirect('home')
+
+@login_required
+def add_additional_purchases(request, user_id):
+    form = AdditionalPurchasesForm(request.POST)
+    if form.is_valid():
+        new_additional_purchase = form.save(commit=False)
+        new_additional_purchase.user_id = user_id
+        new_additional_purchase.save()
     return redirect('home')
 
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
