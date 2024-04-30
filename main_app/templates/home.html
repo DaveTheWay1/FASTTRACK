@@ -7,6 +7,7 @@
         <div class="card-content">
             <h1 class="center-align">${{ cur_balance.amount }}</h1>
             <div class="card-action">
+                <!-- <p>{{original_amount}}</p> -->
                 <a class="right" href="{% url 'current_balance_update' cur_balance.id %}">Edit</a>
             </div>
         </div>
@@ -33,6 +34,7 @@
                     <p class="center-align">${{ cost.amount }}</p>
                     <a class="right"href="{% url 'monthly_cost_delete' cost.id %}">Delete</a>
                     <a class="right" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
+                    <a class="right" href="{% url 'apply_monthly_cost' cur_balance.id cost.id %}">Apply</a>
                 </div>
             </div>
         </div>
@@ -57,8 +59,9 @@
                 <h5 class="center-align">{{ payment.name }}</h1>
                 <div class="card-action">
                     <p class="center-align">${{ payment.amount }}</p>
-                    <a class="right"href="{% url 'monthly_payment_delete' payment.id %}">Delete</a>
+                    <a class="right" href="{% url 'monthly_payment_delete' payment.id %}">Delete</a>
                     <a class="right" href="{% url 'monthly_payment_update' payment.id %}">Edit</a>
+                    <a class="right" href="{% url 'apply_monthly_payment' cur_balance.id payment.id %}">Apply</a>
                 </div>
             </div>
         </div>
@@ -87,6 +90,7 @@
                         <p class="center-align">${{ purchase.amount }}</p>
                         <a class="right"href="{% url 'additional_purchase_delete' purchase.id %}">Delete</a>
                         <a class="right" href="{% url 'additional_purchase_update' purchase.id %}">Edit</a>
+                        <a class="right" href="{% url 'apply_additional_purchase' cur_balance.id purchase.id %}">Apply</a>
                     </div>
                 </div>
             </div>
