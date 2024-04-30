@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5 class="center-align">Monthly Payment Update</h5>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+    {{ form.as_p}}
+    </table>
+    <input type="submit" value="Submit!" class="btn right">
+</form>
+{% endblock %}

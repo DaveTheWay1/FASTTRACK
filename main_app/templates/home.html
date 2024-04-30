@@ -58,7 +58,7 @@
                 <div class="card-action">
                     <p class="center-align">${{ payment.amount }}</p>
                     <a class="right"href="">Delete</a>
-                    <a class="right" href="">Edit</a>
+                    <a class="right" href="{% url 'monthly_payment_update' payment.id %}">Edit</a>
                 </div>
             </div>
         </div>
