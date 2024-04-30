@@ -39,14 +39,13 @@
     </div>
     {% endfor %}
     {% endif %}
+    <h5 class="center-align">Add A Monthly Cost</h5>
+    <form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
+        {% csrf_token %}
+        {{ add_monthly_costs_form.as_p }}
+        <input type="submit" class="btn right" value="Add Monthly Cost">
+    </form>
 </div>
-
-<h5 class="center-align">Add A Monthly Cost</h5>
-<form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
-    {% csrf_token %}
-    {{ add_monthly_costs_form.as_p }}
-    <input type="submit" class="btn right" value="Add Monthly Cost">
-</form>
 
 {% if monthly_payments %}
 <div class="row">
@@ -64,15 +63,45 @@
             </div>
         </div>
     </div>
-{% endfor %}
-{% endif %}
-</div>
-<h5 class="center-align">Add A Monthly Payment</h5>
-<div>
+    {% endfor %}
+    {% endif %}
+    <h5 class="center-align">Add A Monthly Payment</h5>
     <form action="{% url 'add_monthly_payments' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
-        {{ add_monthly_payments_form.as_p }}
-        <input type="submit" class="btn right" value="Add Monthly Payment">
+        {{ add_monthly_payments_form.as_table }}
+        <input type="submit" class="btn right" value="Add Monthly Cost">
     </form>
 </div>
+
+
+{% if additional_purchases %}
+<div class="row">
+    <div>
+        <h5 class="center-align green-text">Additional Purchases</h5>
+        {% for purchase in additional_purchases %}
+        <div class="col s6">
+            <div class="card">
+                <div class="card-content">
+                    <h5 class="center-align">{{ purchase.name }}</h1>
+                    <div class="card-action">
+                        <p class="center-align">${{ purchase.amount }}</p>
+                        <a class="right"href="">Delete</a>
+                        <a class="right" href="">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+    <br>
+    <div>
+        <h5 class="center-align">Add An Additional Purchase</h5>
+        <form action="{% url 'add_additional_purchase' user_id=request.user.id %}" method="POST">
+            {% csrf_token %}
+            {{ add_additional_purchases_form.as_p }}
+            <input type="submit" class="btn right" value="Add Additional Purchase">
+        </form>
+    </div>
 {% endblock %}
