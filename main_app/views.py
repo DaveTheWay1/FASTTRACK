@@ -108,3 +108,7 @@ class MonthlyPaymentDelete(LoginRequiredMixin, DeleteView):
 class AdditionalPurchaseUpdate(LoginRequiredMixin, UpdateView):
     model = Additional_Purchases
     fields = ['name','amount']
+
+class AdditionalPurchaseDelete(LoginRequiredMixin, DeleteView):
+    model = Additional_Purchases
+    success_url = '/'
