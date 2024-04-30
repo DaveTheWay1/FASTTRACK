@@ -9,6 +9,7 @@ urlpatterns = [
     path('current_balance/<int:pk>/update', views.CurrentBalanceUpdate.as_view(), name='current_balance_update'),
     path('user/<int:user_id>/add_monthly_cost/', views.add_monthly_costs, name='add_monthly_costs'),
     path('monthly_cost/<int:pk>/update', views.MonthlyCostUpdate.as_view(), name='monthly_cost_update'),
+    path('monthly_costs/<int:pk>/delete/', views.MonthlyCostDelete.as_view(), name='monthly_cost_delete'),
     path('user/<int:user_id>/add_monthly_payment/', views.add_monthly_payments, name='add_monthly_payments'),
     path('monthly_payment/<int:pk>/update', views.MonthlyPaymentUpdate.as_view(), name='monthly_payment_update'),
     path('user/<int:user_id>/add_additional_purchases/', views.add_additional_purchases, name='add_additional_purchase'),

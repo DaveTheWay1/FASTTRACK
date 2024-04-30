@@ -93,6 +93,10 @@ class MonthlyCostUpdate(LoginRequiredMixin, UpdateView):
     model = Monthly_Costs
     fields = ['name','amount']
 
+class MonthlyCostDelete(LoginRequiredMixin, DeleteView):
+    model = Monthly_Costs
+    success_url = '/'
+
 class MonthlyPaymentUpdate(LoginRequiredMixin, UpdateView):
     model = Monthly_Payments
     fields = ['name','amount']
