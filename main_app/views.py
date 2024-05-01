@@ -60,6 +60,13 @@ def add_current_balance(request, user_id):
     return redirect('home')
 
 @login_required
+def reset(request, current_balance):
+    cur_balance = Current_Balance.objects.get(id=current_balance)
+    cur_balance.amount = cur_balance.original_amount
+    cur_balance.save()
+    return redirect('home')
+
+@login_required
 def add_monthly_costs(request, user_id):
     form = MonthlyCostsForm(request.POST)
     if form.is_valid():
