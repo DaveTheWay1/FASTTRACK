@@ -8,6 +8,7 @@
             <h1 class="center-align">${{ cur_balance.amount }}</h1>
             <div class="card-action">
                 <a class="right" href="{% url 'current_balance_update' cur_balance.id %}">Edit</a>
+                <a class="right" href="{% url 'reset' cur_balance.id %}">Reset</a>
             </div>
         </div>
     </div>
