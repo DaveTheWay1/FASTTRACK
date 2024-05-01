@@ -55,6 +55,7 @@ def add_current_balance(request, user_id):
     if form.is_valid():
         new_current_balance = form.save(commit=False)
         new_current_balance.user_id = user_id
+        new_current_balance.original_amount = new_current_balance.amount
         new_current_balance.save()
     return redirect('home')
 
