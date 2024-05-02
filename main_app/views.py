@@ -38,6 +38,9 @@ def signup(request):
     error_message = ''
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
+        # supers are not required in function based views 
+        # because they dont inherit form_valid from a parent class
+        # rather form_valid is a built object method
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -119,6 +122,18 @@ def apply_additional_purchase(request, current_balance, additional_purchase):
 class CurrentBalanceUpdate(LoginRequiredMixin, UpdateView):
     model = Current_Balance
     fields = ['amount']
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.original_amount = instance.amount  # Set the updated amount as the new original amount
+        instance.save()
+        # * form is valid here requires a super bc it is a 
+        # * class based view that inheritas the form_valid from 
+        # * the parent class ModelFormMixin
+        # supers are not required in function based views 
+        # because they dont inherit form_valid from a parent class
+        # rather form_valid is a built object method
+        return super().form_valid(form)
 
 class MonthlyCostUpdate(LoginRequiredMixin, UpdateView):
     model = Monthly_Costs
