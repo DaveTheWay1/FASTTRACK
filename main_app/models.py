@@ -5,6 +5,7 @@ from django.urls import reverse
 class Current_Balance(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     original_amount = models.FloatField()
+    # applied_amount = models.FloatField()
     amount = models.FloatField()
 
     def get_absolute_url(self):

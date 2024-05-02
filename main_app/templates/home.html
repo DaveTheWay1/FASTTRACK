@@ -9,13 +9,14 @@
             <div class="card-action">
                 <a class="right" href="{% url 'current_balance_update' cur_balance.id %}">Edit</a>
                 <a class="right" href="{% url 'reset' cur_balance.id %}">Reset</a>
+                <p class="right">Original Amount: ${{cur_balance.original_amount}}</p>
             </div>
         </div>
     </div>
 </div>
 {% else %}
 <div class="col s6">
-    <form action="{% url 'add_current_balance' user_id=request.user.id %}" method="POST">
+    <form id="post-form" action="{% url 'add_current_balance' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
         {{ add_balance_form.as_p }}
         <input type="submit" class="btn" value="Add Balance">
@@ -43,6 +44,9 @@
     </div>
     {% endfor %}
     {% endif %}
+</div>
+<br>
+<div>
     <h5 class="center-align">Add A Monthly Cost</h5>
     <form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
@@ -72,6 +76,9 @@
     </div>
     {% endfor %}
     {% endif %}
+</div>
+<br>
+<div>
     <h5 class="center-align">Add A Monthly Payment</h5>
     <form action="{% url 'add_monthly_payments' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
