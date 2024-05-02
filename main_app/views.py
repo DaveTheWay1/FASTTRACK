@@ -79,10 +79,7 @@ def add_monthly_costs(request, user_id):
 def apply_monthly_costs(request, current_balance, monthly_cost):
     cb = Current_Balance.objects.get(id=current_balance)
     mc = Monthly_Costs.objects.get(id=monthly_cost)
-    x = cb.amount
-    y = mc.amount
-    applied = x - y
-    print(applied)
+    applied = cb.amount + mc.amount
     cb.amount = applied
     cb.save()
     return redirect('home')
@@ -99,11 +96,7 @@ def add_monthly_payments(request, user_id):
 def apply_monthly_payment(request, current_balance, monthly_payment):
     cb = Current_Balance.objects.get(id=current_balance)
     mp = Monthly_Payments.objects.get(id=monthly_payment)
-    x = cb.amount
-    y = mp.amount
-    applied = x + y
-    print(applied)
-    cb.amount = applied
+    cb.amount = cb.amount + mp.amount
     cb.save()
     return redirect('home')
 
@@ -119,11 +112,7 @@ def add_additional_purchases(request, user_id):
 def apply_additional_purchase(request, current_balance, additional_purchase):
     cb = Current_Balance.objects.get(id=current_balance)
     ap = Additional_Purchases.objects.get(id=additional_purchase)
-    x = cb.amount
-    y = ap.amount
-    applied = x - y
-    print(applied)
-    cb.amount = applied
+    cb.amount = cb.amount - ap.amount
     cb.save()
     return redirect('home')
 
