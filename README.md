@@ -44,9 +44,8 @@ After the user has applied all costs and expenses, or made an error within the p
 - CSS
 
 # Getting Started
-<!-- https://trello.com/invite/b/hyvPril6/ATTI9732b26baee1dbbecec1ea726abb3548FB389116/fat-track  -->
 [Click to View Project Planning](https://trello.com/invite/b/hyvPril6/ATTI9732b26baee1dbbecec1ea726abb3548FB389116/fat-track)
-[Click to Play Connect Four!](your deployment url here)
+[Click to Check Out FA$STRACK!](https://fasttrack452310-057c7397b5f6.herokuapp.com/accounts/login/)
 
 # Next Steps
 
