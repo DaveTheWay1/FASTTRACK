@@ -6,7 +6,14 @@ Fasttrack is your go-to app for quick financial planning. Designed for individua
 # Screenshot
 
 ![SignUp Image](main_app/static/images/signup.jpg)
-<img src="url to your image on imgur">
+![Login Image](main_app/static/images/login.jpg)
+![Home Starting Display Image](main_app/static/images/homestart.jpg)
+![Entered Balance Image](main_app/static/images/entered_balance.jpg)
+![Example Image](main_app/static/images/create_costs_pay.jpg)
+![Example Image](main_app/static/images/create_add_purchase.jpg)
+![Example Image](main_app/static/images/update.jpg)
+![Example Image](main_app/static/images/delete.jpg)
+![Example Image](main_app/static/images/reset.jpg)
 
 # Technologies Used
 
