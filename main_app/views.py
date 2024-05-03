@@ -82,7 +82,7 @@ def add_monthly_costs(request, user_id):
 def apply_monthly_costs(request, current_balance, monthly_cost):
     cb = Current_Balance.objects.get(id=current_balance)
     mc = Monthly_Costs.objects.get(id=monthly_cost)
-    applied = cb.amount + mc.amount
+    applied = cb.amount - mc.amount
     cb.amount = applied
     cb.save()
     return redirect('home')

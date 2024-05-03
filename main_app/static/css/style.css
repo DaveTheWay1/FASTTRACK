@@ -1,3 +1,64 @@
-.row{
-    border: solid black 1px;
+body{
+    background-color: #ADD8E6;
+    padding-bottom: 100px;
+}
+
+#og-amount{
+    margin-right: 15px;
+}
+
+#home-form{
+    background-color: white;
+    padding: 15px;
+    width: 700px;
+    height: 300px ;
+    display: block;
+    margin: 0 auto;
+}
+
+#login-header{
+    font-weight: 700;
+}
+
+#login-form{
+    background-color: white;
+}
+
+#update-form{
+    background-color: white;
+    padding: 15px;
+    width: 700px;
+    height: 300px ;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+#mph-update{
+    font-weight: 700;
+}
+
+.right{
+    font-weight: 700;
+}
+
+a {
+    color: blue
+}
+
+#home-link{
+    font-weight: 700;
+}
+
+#delete-btn{
+    background: white;
+    border: none;
+}
+
+#delete-btn:hover{
+    cursor: pointer;
+}
+
+#money{
+    color:green;
 }

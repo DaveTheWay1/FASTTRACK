@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Update Your Additional Purchase</h1>
-<form action="" method="POST">
+<h5 id="mph-update" class="center-align">Update Your <span class="blue-text">{{object.name}} </span>Additional Purchase</h5>
+<form id="update-form" action="" method="POST">
     {% csrf_token %}
     <table>
     {{ form.as_p}}
     </table>
-    <input type="submit" value="Submit!" class="btn right">
+    <input type="submit" value="Submit!" class="btn blue right">
 </form>
 {% endblock %}
