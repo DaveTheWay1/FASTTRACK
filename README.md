@@ -5,7 +5,7 @@ Fasttrack is your go-to app for quick financial planning. Designed for individua
 
 # Screenshot
 
-![SignUp Image](main_app/static/images/sign.jpg)
+![SignUp Image](main_app/static/images/signup.jpg)
 <img src="url to your image on imgur">
 
 # Technologies Used
