@@ -49,5 +49,8 @@ After the user has applied all costs and expenses, or made an error within the p
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+1. Remove the refresh that occurs upon form submissions.
+2. Work on editing on the same page.
+3. Add More inviting styling
+4. A way to track what has been applied to the current balance
+5. A working calendar
