@@ -16,12 +16,13 @@ body{
     margin: 0 auto;
 }
 
-#login-header{
-    font-weight: 700;
-}
+/* #login-header{
+    /* font-weight: 700; */
+/* } */ 
 
 #login-form{
-    background-color: white;
+    /* background-color: white; */
+    padding: 10px;
 }
 
 #update-form{
