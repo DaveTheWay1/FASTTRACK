@@ -12,13 +12,13 @@
             <div class="card-action">
                 <a class="right blue-text" href="{% url 'current_balance_update' cur_balance.id %}">Edit</a>
                 <a class="right red-text" href="{% url 'reset' cur_balance.id %}">Reset</a>
-                <p id ="og-amount" class="right">Original Amount: ${{cur_balance.original_amount}}</p>
+                <p id="og-amount" class="right">Original Amount: ${{cur_balance.original_amount}}</p>
             </div>
         </div>
     </div>
 </div>
 {% else %}
-<div  id = "home-form" class="col s6">
+<div id="home-form" class="col s6">
     <h5 class="center-align">Add Your Current Balance</h5>
     <form action="{% url 'add_current_balance' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
@@ -35,14 +35,15 @@
         <div class="card">
             <div class="card-content">
                 <h5 class="center-align">{{ cost.name }}</h1>
-                <div class="card-action">
-                    <p class="center-align">${{ cost.amount }}</p>
-                    <a class="right red-text"href="{% url 'monthly_cost_delete' cost.id %}">Delete</a>
-                    <a class="right blue-text" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
-                    {% if cur_balance %}
-                        <a class="right green-text" href="{% url 'apply_monthly_cost' cur_balance.id cost.id %}">Apply</a>
-                    {% endif %}
-                </div>
+                    <div class="card-action">
+                        <p class="center-align">${{ cost.amount }}</p>
+                        <a class="right red-text" href="{% url 'monthly_cost_delete' cost.id %}">Delete</a>
+                        <a class="right blue-text" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
+                        {% if cur_balance %}
+                        <a class="right green-text"
+                            href="{% url 'apply_monthly_cost' cur_balance.id cost.id %}">Apply</a>
+                        {% endif %}
+                    </div>
             </div>
         </div>
     </div>
@@ -58,7 +59,6 @@
         <input type="submit" class="btn blue right" value="Add Monthly Cost">
     </form>
 </div>
-
 <br>
 {% if monthly_payments %}
 <div class="row">
@@ -68,14 +68,15 @@
         <div class="card">
             <div class="card-content">
                 <h5 class="center-align">{{ payment.name }}</h1>
-                <div class="card-action">
-                    <p class="center-align">${{ payment.amount }}</p>
-                    <a class="right red-text" href="{% url 'monthly_payment_delete' payment.id %}">Delete</a>
-                    <a class="right blue-text" href="{% url 'monthly_payment_update' payment.id %}">Edit</a>
-                    {%if cur_balance %}
-                        <a class="right green-text" href="{% url 'apply_monthly_payment' cur_balance.id payment.id %}">Apply</a>
-                    {% endif %}
-                </div>
+                    <div class="card-action">
+                        <p class="center-align">${{ payment.amount }}</p>
+                        <a class="right red-text" href="{% url 'monthly_payment_delete' payment.id %}">Delete</a>
+                        <a class="right blue-text" href="{% url 'monthly_payment_update' payment.id %}">Edit</a>
+                        {%if cur_balance %}
+                        <a class="right green-text"
+                            href="{% url 'apply_monthly_payment' cur_balance.id payment.id %}">Apply</a>
+                        {% endif %}
+                    </div>
             </div>
         </div>
     </div>
@@ -91,7 +92,6 @@
         <input type="submit" class="btn blue right" value="Add Monthly Payment">
     </form>
 </div>
-
 <br>
 {% if additional_purchases %}
 <div class="row">
@@ -102,17 +102,19 @@
             <div class="card">
                 <div class="card-content">
                     <h5 class="center-align">{{ purchase.name }}</h1>
-                    <div class="card-action">
-                        <p class="center-align">${{ purchase.amount }}</p>
-                        <form method="POST" action="{% url 'additional_purchase_delete' purchase.id %}">
-                            {% csrf_token %}<input id="delete-btn" class="right red-text" type="submit" value="DELETE">
-                        </form>
-                        <!-- <a class="right red-text"href="{% url 'additional_purchase_delete' purchase.id %}">Delete</a> -->
-                        <a class="right blue-text" href="{% url 'additional_purchase_update' purchase.id %}">Edit</a>
-                        {% if cur_balance %}
-                            <a class="right green-text" href="{% url 'apply_additional_purchase' cur_balance.id purchase.id %}">Apply</a>
-                        {% endif %}
-                    </div>
+                        <div class="card-action">
+                            <p class="center-align">${{ purchase.amount }}</p>
+                            <form method="POST" action="{% url 'additional_purchase_delete' purchase.id %}">
+                                {% csrf_token %}<input id="delete-btn" class="right red-text" type="submit"
+                                    value="DELETE">
+                            </form>
+                            <a class="right blue-text"
+                                href="{% url 'additional_purchase_update' purchase.id %}">Edit</a>
+                            {% if cur_balance %}
+                            <a class="right green-text"
+                                href="{% url 'apply_additional_purchase' cur_balance.id purchase.id %}">Apply</a>
+                            {% endif %}
+                        </div>
                 </div>
             </div>
         </div>

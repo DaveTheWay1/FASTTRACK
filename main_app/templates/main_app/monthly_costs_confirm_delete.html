@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Delete Monthly Cost</h1>
-
-    <h4>Are you sure you want to delete <span class="blue-text">{{ object.name }}</span>?</h4>
-
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Yes - Delete!" class="btn red">
-        <a href="{% url 'home' %}" class="btn blue">Cancel</a>
-    </form>
+<h1>Delete Monthly Cost</h1>
+<h4>Are you sure you want to delete <span class="blue-text">{{ object.name }}</span>?</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete!" class="btn red">
+    <a href="{% url 'home' %}" class="btn blue">Cancel</a>
+</form>
 {% endblock %}
