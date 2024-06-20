@@ -30,13 +30,13 @@
 {% if monthly_costs %}
 <div class="row">
     <h5 class="center-align">Monthly Costs</h5>
-    {% for cost in monthly_costs %}
+    <!-- {% for cost in monthly_costs %} -->
     <div class="col s6">
         <div class="card">
-            <div class="card-content">
-                <h5 class="center-align">{{ cost.name }}</h1>
+            <div class="card-content" id="media-body">
+                <h5 id="cost_name" class="center-align">{{ cost.name }}</h1>
                     <div class="card-action">
-                        <p class="center-align">${{ cost.amount }}</p>
+                        <p id="cost_amount" class="center-align">${{ cost.amount }}</p>
                         <a class="right red-text" href="{% url 'monthly_cost_delete' cost.id %}">Delete</a>
                         <a class="right blue-text" href="{% url 'monthly_cost_update' cost.id %}">Edit</a>
                         {% if cur_balance %}
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+    <!-- {% endfor %} -->
     {% endif %}
 </div>
 <br>
@@ -135,16 +135,25 @@
 </div>
 <script>
     let form = document.getElementById("monthly_cost_form")
+    let cost_container = document.getElementById("media-body")
+
     form.addEventListener('submit', stopReload)
     function stopReload(e){
         e.preventDefault()
+        let cost_name = document.createElement('h5')
+        cost_name.classList.add('center-align')
+        let cost_amount = document.createElement('p')
+        cost_amount.classList.add('center-align')
         $.ajax({
             type:'POST',
             url: "{% url 'add_monthly_costs' user_id=request.user.id %}",
             data: $("#monthly_cost_form").serialize(),
             datatype: "json",
             success: function(data){
-                console.log(data.monthly_cost_name)
+                cost_name.innerText = data.monthly_cost_name
+                cost_amount.innerText = data.monthly_cost_amount
+                cost_container.appendChild(cost_name)
+                cost_container.appendChild(cost_amount)
             }
         })
     }
