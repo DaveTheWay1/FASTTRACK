@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth import login
@@ -76,6 +77,7 @@ def add_monthly_costs(request, user_id):
         new_monthly_cost = form.save(commit=False)
         new_monthly_cost.user_id = user_id
         new_monthly_cost.save()
+        return JsonResponse({'monthly_cost_name': new_monthly_cost.name, 'monthly_cost_amount':new_monthly_cost.amount})
     return redirect('home')
 
 
