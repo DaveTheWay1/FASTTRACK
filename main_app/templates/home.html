@@ -53,9 +53,10 @@
 <br>
 <div id="home-form" class="card">
     <h5 class="center-align">Add A Monthly Cost</h5>
-    <form action="{% url 'add_monthly_costs' user_id=request.user.id %}" method="POST">
+    <form id="monthly_cost_form" method="POST">
         {% csrf_token %}
-        {{ add_monthly_costs_form.as_p }}
+        {{ add_monthly_costs_form.name }}
+        {{ add_monthly_costs_form.amount }}
         <input type="submit" class="btn blue right" value="Add Monthly Cost">
     </form>
 </div>
@@ -128,7 +129,24 @@
     <form action="{% url 'add_additional_purchase' user_id=request.user.id %}" method="POST">
         {% csrf_token %}
         {{ add_additional_purchases_form.as_p }}
+        <br>
         <input type="submit" class="btn blue right" value="Add Additional Purchase">
     </form>
 </div>
+<script>
+    let form = document.getElementById("monthly_cost_form")
+    form.addEventListener('submit', stopReload)
+    function stopReload(e){
+        e.preventDefault()
+        $.ajax({
+            type:'POST',
+            url: "{% url 'add_monthly_costs' user_id=request.user.id %}",
+            data: $("#monthly_cost_form").serialize(),
+            datatype: "json",
+            success: function(data){
+                console.log(data.monthly_cost_name)
+            }
+        })
+    }
+</script>
 {% endblock %}
